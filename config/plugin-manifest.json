@@ -1,0 +1,25 @@
+{
+  "auditedAt": "2026-08-21",
+  "install": [
+    {"id": "documents@openai-primary-runtime", "snapshotVersion": "26.819.11345"},
+    {"id": "pdf@openai-primary-runtime", "snapshotVersion": "26.819.11345"},
+    {"id": "spreadsheets@openai-primary-runtime", "snapshotVersion": "26.819.11345"},
+    {"id": "presentations@openai-primary-runtime", "snapshotVersion": "26.819.11345"},
+    {"id": "template-creator@openai-primary-runtime", "snapshotVersion": "26.819.11345"},
+    {"id": "codex-app-tools@openai-bundled", "snapshotVersion": "0.1.0"},
+    {"id": "browser@openai-bundled", "snapshotVersion": "26.814.41407"},
+    {"id": "chrome@openai-bundled", "snapshotVersion": "26.814.41407"},
+    {"id": "computer-use@openai-bundled", "snapshotVersion": "1.0.1000761"},
+    {"id": "visualize@openai-bundled", "snapshotVersion": "1.0.21"},
+    {"id": "computer-history@openai-bundled-app", "snapshotVersion": "1.0.1000717"},
+    {"id": "compound-engineering@compound-engineering-plugin", "snapshotVersion": "3.22.4"},
+    {"id": "gmail@openai-curated", "snapshotVersion": "11c74d6b"},
+    {"id": "vercel@openai-curated", "snapshotVersion": "11c74d6b"},
+    {"id": "github@openai-curated", "snapshotVersion": "11c74d6b"},
+    {"id": "notion@openai-curated", "snapshotVersion": "11c74d6b"},
+    {"id": "zoom@openai-curated", "snapshotVersion": "1.0.2", "reason": "Replaces the non-portable local Zoom MCP bridge"}
+  ],
+  "leaveDisabled": [
+    {"id": "sites@openai-bundled", "reason": "Disabled in the source setup"}
+  ]
+}

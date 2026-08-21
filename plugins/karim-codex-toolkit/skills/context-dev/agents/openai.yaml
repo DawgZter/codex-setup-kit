@@ -1,0 +1,4 @@
+interface:
+  display_name: "Context.dev"
+  short_description: "Scrape richer Markdown with Context.dev"
+  default_prompt: "Use $context-dev to fetch this URL as rich Markdown."

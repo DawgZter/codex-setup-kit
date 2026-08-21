@@ -1,0 +1,20 @@
+{
+  "name": "karim-codex-setup",
+  "interface": {
+    "displayName": "Karim Codex Setup"
+  },
+  "plugins": [
+    {
+      "name": "karim-codex-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/karim-codex-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "productivity"
+    }
+  ]
+}

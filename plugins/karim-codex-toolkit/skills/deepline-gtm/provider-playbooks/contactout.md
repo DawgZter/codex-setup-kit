@@ -1,0 +1,148 @@
+# ContactOut — Agent Guidance
+
+## When to use
+
+ContactOut for LinkedIn → email/phone enrichment when you have a LinkedIn URL. High accuracy for active LinkedIn users. Strong for US + global. Falls after dropleads in cost-ordered waterfalls.
+
+**Important**: Free pre-check APIs (`contactout_check_email_status`, `contactout_check_work_email`, `contactout_check_personal_email`, `contactout_check_phone`) are informational only. Do not use an empty pre-check to skip a paid reveal: it can be empty even when ContactOut's paid reveal returns verified contact data.
+
+## Provider characteristics
+
+- **Input required**: LinkedIn URL (best), email, or name+company
+- **Geographic coverage**: Global, strongest in US + Europe
+- **Provider credit cost**: ~$0.10 per ContactOut email credit; separate phone + search credits
+- **LinkedIn URL requirement**: Must contain "linkedin.com/in/" or "linkedin.com/pub/". Sales Navigator URLs not supported.
+
+## Key operations
+
+### contactout_linkedin_contact_info
+
+Uses ContactOut's Contact Info API (`GET /v1/people/linkedin`) for one LinkedIn profile. For personal-email waterfalls, call this instead of `contactout_enrich_person`:
+
+```json
+{
+  "profile": "https://www.linkedin.com/in/johndoe",
+  "email_type": "personal"
+}
+```
+
+`email_type` accepts `personal`, `work`, `personal,work`, or `none`. ContactOut only consumes email credits when emails are returned; `email_type: "none"` returns no emails and consumes no email credits. `include_phone: true` can consume phone credits when phone numbers are returned.
+
+A customer credential connected in the dashboard always overrides the managed
+personal and work credential lanes.
+
+Managed-key routing follows ContactOut's endpoint entitlements:
+`GET /v1/people/linkedin` and the work-email status checker use the work key;
+`POST /v1/people/identifiers` uses the managed-only hashed key; enrich, search,
+domain, and personal-status endpoints use the personal/default key. The
+connector does not currently expose either LinkedIn batch endpoint.
+
+ContactOut does not document a per-call charge response header for this endpoint. Deepline billing is therefore locked to the documented response fields: one email credit when any returned email bucket is non-empty, plus one phone credit when a phone bucket is non-empty.
+
+### contactout_get_hashed_email_identifiers
+
+Converts a batch of 5–100 LinkedIn profile URLs into hashed email identifiers
+for privacy-safe paid-ads audience matching. Use it to raise Meta/Google match
+rates without handling raw personal emails.
+
+ContactOut returns a flat `matches.emails` hash list plus a request-scoped
+`matches_found` count. One matched profile can return several hashes, so the
+hash count is NOT the matched-profile count. Deepline bills one email credit
+per `matches_found`, never per returned hash.
+
+A batch where nothing matches returns HTTP 404 `No hashed emails found`, which
+Deepline maps to an unbilled empty result. Requests with fewer than 5 unique
+profiles are rejected by ContactOut with HTTP 400.
+
+Because the hash list is unattributed, you cannot map a specific hash back to a
+specific input profile. Treat the output as an audience-level hash pool, not as
+per-row enrichment. Managed requests use the dedicated hashed API credential.
+
+### contactout_check_email_status (FREE convenience helper)
+
+Checks work-email and personal-email availability together for one LinkedIn profile.
+
+```json
+{
+  "profile": "https://www.linkedin.com/in/johndoe"
+}
+```
+
+Returns:
+
+- `contactout_check_email_status` → `{ "has_personal_email": false, "has_work_email": true, "status": "verified" }`
+
+### contactout_check_work_email / contactout_check_personal_email / contactout_check_phone (FREE — informational only)
+
+Check whether a LinkedIn profile has work email, personal email, or phone coverage. Zero credits consumed. Their results are not authoritative and must not gate `contactout_linkedin_contact_info` or `contactout_enrich_person`.
+
+```json
+{
+  "profile": "https://www.linkedin.com/in/johndoe"
+}
+```
+
+Returns one channel-specific payload per tool:
+
+- `contactout_check_work_email` → `{ "has_work_email": true, "status": "verified" }`
+- `contactout_check_personal_email` → `{ "has_personal_email": false }`
+- `contactout_check_phone` → `{ "has_phone": true }`
+
+### contactout_enrich_person
+
+Enriches a person by LinkedIn URL (preferred), email, or name+company. Returns email array at `email`, `work_email`, `personal_email`.
+
+```json
+{
+  "linkedin_url": "https://www.linkedin.com/in/johndoe",
+  "include": ["work_email"]
+}
+```
+
+```json
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "company_domain": "acme.com"
+}
+```
+
+### contactout_search_people
+
+Search people by title, company, location, seniority. Use `reveal_info: false` (default) for count/discovery. Set `reveal_info: true` to retrieve emails (costs search + email credits).
+
+```json
+{
+  "job_title": "(VP OR Head) Sales",
+  "company_size": "201-500",
+  "location": "United States",
+  "reveal_info": false
+}
+```
+
+Boolean logic supported: `"(Sales AND CRM) NOT Manager"`
+
+### contactout_enrich_domain
+
+Enriches company data (size, industry, funding, HQ) from a domain name.
+
+```json
+{
+  "domain": "salesforce.com"
+}
+```
+
+## Output shape
+
+`contactout_enrich_person` returns a flat profile object. Email at `email[0]`, `work_email[0]`, or `personal_email[0]`. No nested envelope.
+
+`contactout_linkedin_contact_info` returns the same flat profile object, but profile-only responses with no email or phone data are treated as no-result for billing and waterfall control.
+
+`contactout_search_people` returns `{ profiles: [...], metadata: { total_results: N } }`.
+
+## Anti-patterns
+
+- Don't use Sales Navigator or Recruiter URLs — they'll return 400
+- Don't use an empty free checker result to suppress a paid reveal — only the paid reveal determines whether ContactOut returns usable contact data
+- Don't include "http://" or "www." in domain values for `enrich_domain`
+- Don't set `reveal_info: true` on search without knowing the count first — use `reveal_info: false` to size the audience

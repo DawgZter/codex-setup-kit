@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scrape Nooks Call Transcripts"
+  short_description: "Export authenticated Nooks call-library transcripts."
+  default_prompt: "Scrape Nooks call transcripts from an authenticated call-library URL and export full speaker-labeled transcripts."

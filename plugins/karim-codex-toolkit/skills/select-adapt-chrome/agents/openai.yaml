@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adapt Chrome Profile"
+  short_description: "Default Chrome work to the Adapt account"
+  default_prompt: "Use $select-adapt-chrome to perform this task in my configured work Chrome profile unless I explicitly request my personal profile."

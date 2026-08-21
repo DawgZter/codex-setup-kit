@@ -1,0 +1,45 @@
+{
+  "auditedAt": "2026-08-21",
+  "required": [
+    {"command": "codex", "purpose": "Plugin, MCP, and agent runtime"},
+    {"command": "git", "purpose": "Repository operations"},
+    {"command": "node", "purpose": "JavaScript skill and MCP runtime"},
+    {"command": "npm", "purpose": "Node package management"},
+    {"command": "npx", "purpose": "Pinned local MCP launchers"},
+    {"command": "python3", "purpose": "Skill scripts and validation"},
+    {"command": "jq", "purpose": "Structured CLI output"},
+    {"command": "rg", "purpose": "Fast repository search"},
+    {"command": "curl", "purpose": "Explicit API and diagnostic calls"}
+  ],
+  "recommended": [
+    {"command": "gh", "purpose": "Local-checkout GitHub workflows"},
+    {"command": "claude", "purpose": "Runtime underneath the Claude Code MCP bridge"},
+    {"command": "uv", "purpose": "Python tools and isolated execution"},
+    {"command": "ffmpeg", "purpose": "Media processing skills"},
+    {"command": "ffprobe", "purpose": "Media inspection skills"},
+    {"command": "docker", "purpose": "Containerized development"},
+    {"command": "pnpm", "purpose": "JavaScript repositories that use pnpm"},
+    {"command": "bun", "purpose": "JavaScript repositories that use Bun"},
+    {"command": "agent-browser", "purpose": "Explicit CLI browser sessions"},
+    {"command": "scrapecreators", "purpose": "Optional batch and shell use; MCP remains primary"},
+    {"command": "letsfg", "purpose": "LetsFG authentication and manual CLI workflows"},
+    {"command": "mlxfast", "purpose": "MLXFast challenge workflows"}
+  ],
+  "sourceMachineSnapshot": {
+    "codex": "0.146.0",
+    "git": "2.50.1",
+    "gh": "2.95.0",
+    "node": "24.16.0",
+    "npm": "11.13.0",
+    "python3": "3.14.7",
+    "jq": "1.7.1",
+    "rg": "15.2.0",
+    "claude": "2.1.226",
+    "uv": "0.12.3",
+    "docker": "29.7.1",
+    "pnpm": "11.19.0",
+    "bun": "1.3.14",
+    "agent-browser": "0.33.2",
+    "scrapecreators": "1.0.0"
+  }
+}

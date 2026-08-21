@@ -1,0 +1,22 @@
+{
+  "name": "karim-codex-toolkit",
+  "version": "1.0.0",
+  "description": "Portable, secret-free plugin skills and MCP routing used by Karim's setup.",
+  "author": {
+    "name": "Karim Yahia"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Karim Codex Toolkit",
+    "shortDescription": "Karim's portable skills and MCP routing.",
+    "longDescription": "A reviewed, secret-free bundle of 45 plugin-compatible skills plus canonical MCP endpoints. Explicit-only skills remain separately guarded by the repository installer.",
+    "developerName": "Karim Yahia",
+    "category": "Productivity",
+    "capabilities": [
+      "Skills",
+      "MCP servers"
+    ],
+    "defaultPrompt": "Use the most relevant installed skill and canonical MCP for this task, following the routing rules in the repository AGENTS.md."
+  },
+  "mcpServers": "./.mcp.json"
+}

@@ -1,0 +1,87 @@
+{
+  "mcpServers": {
+    "agentenrich": {
+      "command": "npx",
+      "args": ["-y", "@agentenrich/mcp@0.1.1"],
+      "env_vars": ["AGENTENRICH_API_KEY"],
+      "startup_timeout_sec": 30
+    },
+    "bland": {
+      "type": "http",
+      "url": "https://api.bland.ai/v1/mcp",
+      "bearer_token_env_var": "BLAND_API_KEY"
+    },
+    "claude-code": {
+      "command": "./scripts/launch-claude-code-mcp.zsh",
+      "cwd": ".",
+      "startup_timeout_sec": 30,
+      "tool_timeout_sec": 3600
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp/oauth"
+    },
+    "context_dev_api": {
+      "command": "npx",
+      "args": ["-y", "context.dev-mcp@1.23.0"],
+      "env_vars": ["CONTEXT_DEV_API_KEY"],
+      "startup_timeout_sec": 30
+    },
+    "exa": {
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp"
+    },
+    "fathom": {
+      "type": "http",
+      "url": "https://api.fathom.ai/mcp"
+    },
+    "fibbler": {
+      "type": "http",
+      "url": "https://app.fibbler.co/mcp"
+    },
+    "githits": {
+      "type": "http",
+      "url": "https://mcp.githits.com"
+    },
+    "heroui-pro": {
+      "type": "http",
+      "url": "https://mcp.heroui.pro/mcp",
+      "env_http_headers": {
+        "x-heroui-personal-token": "HEROUI_PERSONAL_TOKEN"
+      }
+    },
+    "instantly": {
+      "type": "http",
+      "url": "https://mcp.instantly.ai/mcp",
+      "env_http_headers": {
+        "Authorization": "INSTANTLY_API_KEY"
+      }
+    },
+    "letsfg": {
+      "command": "./scripts/launch-letsfg-mcp.zsh",
+      "cwd": ".",
+      "env_vars": ["LETSFG_API_KEY", "LETSFG_BEARER_TOKEN"],
+      "startup_timeout_sec": 30
+    },
+    "moltsets": {
+      "type": "http",
+      "url": "https://mcp.moltsets.com/mcp"
+    },
+    "openaiDeveloperDocs": {
+      "type": "http",
+      "url": "https://developers.openai.com/mcp"
+    },
+    "reui": {
+      "type": "http",
+      "url": "https://mcp.reui.io"
+    },
+    "scrapecreators": {
+      "type": "http",
+      "url": "https://api.scrapecreators.com/mcp"
+    },
+    "vector": {
+      "type": "http",
+      "url": "https://mcp.vector.co/mcp"
+    }
+  }
+}

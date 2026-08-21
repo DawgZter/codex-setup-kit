@@ -1,0 +1,14 @@
+interface:
+  display_name: "Delegate to Claude"
+  short_description: "Run Claude Code as a monitored sub-agent"
+  default_prompt: "Use $delegate-to-claude to ask Fable to review this task safely and monitor it to completion."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "claude-code"
+      description: "Local Claude Code session bridge"
+      transport: "stdio"
+
+policy:
+  allow_implicit_invocation: true

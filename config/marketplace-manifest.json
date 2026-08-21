@@ -1,0 +1,9 @@
+{
+  "external": [
+    {
+      "name": "compound-engineering-plugin",
+      "source": "https://github.com/EveryInc/compound-engineering-plugin.git",
+      "reason": "Required for compound-engineering@compound-engineering-plugin"
+    }
+  ]
+}

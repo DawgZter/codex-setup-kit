@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.zip
+auth.json
+credentials.json
+secrets/
+work/
+node_modules/
+__pycache__/
+*.pyc

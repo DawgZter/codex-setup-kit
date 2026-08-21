@@ -1,0 +1,15 @@
+# Merge reference only. Do not replace an existing ~/.codex/config.toml.
+# Model and service-tier access vary by recipient, so set these only when the
+# account supports them.
+# model = "gpt-5.6-sol"
+# model_reasoning_effort = "xhigh"
+# service_tier = "priority"
+
+# Safer portable defaults than the source machine's unrestricted local profile.
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[features]
+default_mode_request_user_input = true
+memories = true
+multi_agent_v2 = true
