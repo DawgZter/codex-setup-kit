@@ -1,0 +1,61 @@
+{
+  "auditedAt": "2026-08-21",
+  "policy": "Optional add-ons are never installed or activated by install.zsh. Use addons.zsh with an explicit add-on ID.",
+  "addons": [
+    {
+      "id": "opencodex",
+      "name": "OpenCodex",
+      "kind": "optional-cli-and-local-proxy",
+      "repository": "https://github.com/lidge-jun/opencodex",
+      "packageManager": "npm",
+      "package": "@bitkyc08/opencodex",
+      "snapshotVersion": "2.28.0",
+      "commands": ["ocx", "opencodex"],
+      "installOnly": "npm install --global @bitkyc08/opencodex@2.28.0",
+      "activation": ["ocx init", "ocx start"],
+      "automaticActivation": false,
+      "warning": "Third-party provider router. Initialization can rewrite Codex provider configuration; review provider terms and authorize activation separately."
+    },
+    {
+      "id": "codexbar",
+      "name": "CodexBar",
+      "kind": "optional-macos-app-and-cli",
+      "repository": "https://github.com/steipete/CodexBar",
+      "packageManager": "homebrew-cask",
+      "package": "codexbar",
+      "snapshotVersion": "0.53.0",
+      "upstreamLatestVersion": "0.54.0",
+      "commands": ["codexbar"],
+      "installOnly": "brew install --cask codexbar",
+      "automaticActivation": false,
+      "warning": "Optional macOS usage-limit and status monitor. Review its local-file, Keychain, browser-cookie, and provider-access behavior before enabling integrations."
+    }
+  ],
+  "references": [
+    {
+      "id": "openai-codex",
+      "name": "OpenAI Codex",
+      "kind": "upstream-reference",
+      "repository": "https://github.com/openai/codex",
+      "install": "npm install --global @openai/codex@latest",
+      "reason": "Canonical upstream source and installation reference; Codex itself is already a required dependency of this kit."
+    }
+  ],
+  "consideredNotIncluded": [
+    {
+      "id": "oh-my-codex",
+      "repository": "https://github.com/Yeachan-Heo/oh-my-codex",
+      "reason": "Its agents, hooks, workflows, and configuration merging substantially overlap this kit and Compound Engineering."
+    },
+    {
+      "id": "codex-hud",
+      "repository": "https://github.com/fwyc0573/codex-hud",
+      "reason": "A terminal status wrapper is lower value now that current Codex builds provide native status-line customization."
+    },
+    {
+      "id": "opencode",
+      "repository": "https://github.com/anomalyco/opencode",
+      "reason": "OpenCode is a separate coding-agent product, not the OpenCodex routing companion requested here."
+    }
+  ]
+}

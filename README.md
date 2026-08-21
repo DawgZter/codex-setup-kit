@@ -1,6 +1,6 @@
 # Karim's Codex Setup Kit
 
-This repository is a portable, secret-free export of Karim's reviewed Codex setup. It packages 63 deduplicated local skills, canonical MCP endpoints, supported Codex plugins, and the command-line dependencies those skills expect.
+This repository is a portable, secret-free export of Karim's reviewed Codex setup. It packages 63 deduplicated local skills, canonical MCP endpoints, supported Codex plugins, and the command-line dependencies those skills expect. It also catalogs optional Codex companions without silently installing or activating them.
 
 It deliberately does **not** copy `~/.codex/config.toml`, OAuth state, Keychain entries, local app binaries, project trust records, task history, or tokens. Webflow MCP and Webflow skills are explicitly excluded. Vercel Workflow remains available through the Vercel plugin.
 
@@ -25,10 +25,22 @@ To hand the repo to another agent, use this prompt:
 
 - `karim-codex-toolkit`: 45 plugin-compatible skills plus 17 MCP definitions.
 - `skills/explicit-only`: 18 skills installed locally so their model-invocation guard stays intact.
-- Official plugins: browser, Chrome, computer use, GitHub, Gmail, Notion, Vercel, document/PDF/spreadsheet/presentation tools, visualization, computer history, Compound Engineering, and Zoom.
+- Official plugins: browser, Chrome, computer use, GitHub, Gmail, Notion, Vercel, Codex Security, document/PDF/spreadsheet/presentation tools, visualization, computer history, Compound Engineering, and Zoom.
 - Portable MCP launchers for the Claude Code bridge and LetsFG.
 
 The installer checks CLIs but does not install package managers or system software on the recipient's behalf. See `docs/CLI.md` for required and optional commands.
+
+## Optional Codex add-ons
+
+OpenCodex is available as a pinned, explicit package install; CodexBar is available as an explicit macOS cask install; and the official OpenAI Codex repository is linked as the canonical upstream reference:
+
+```zsh
+./addons.zsh list
+./addons.zsh info opencodex
+./addons.zsh install opencodex
+```
+
+The OpenCodex command installs the package only. It does not run `ocx init`, start its proxy, install a background service or shim, or alter Codex routing. See `docs/ADDONS.md` for the safety boundary and the other tools considered.
 
 ## Authentication
 

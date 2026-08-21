@@ -17,6 +17,7 @@
     {"id": "vercel@openai-curated", "snapshotVersion": "11c74d6b"},
     {"id": "github@openai-curated", "snapshotVersion": "11c74d6b"},
     {"id": "notion@openai-curated", "snapshotVersion": "11c74d6b"},
+    {"id": "codex-security@openai-curated", "snapshotVersion": "0.1.11", "reason": "Authorization-gated code security scans"},
     {"id": "zoom@openai-curated", "snapshotVersion": "1.0.2", "reason": "Replaces the non-portable local Zoom MCP bridge"}
   ],
   "leaveDisabled": [

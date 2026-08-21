@@ -21,9 +21,13 @@ CLIs are included as first-class dependencies, but not as duplicate defaults for
 
 The exact machine snapshot is recorded in `config/cli-manifest.json`. Versions are evidence of what was audited, not global minimums.
 
+## Opt-in Codex companions
+
+OpenCodex (`ocx`) and CodexBar are tracked separately in `config/addon-manifest.json` because they are not skill runtime dependencies. Use `./addons.zsh list` to inspect them and `./addons.zsh install <id>` only after making an explicit choice. The main installer never installs or activates them.
+
 ## Installation boundary
 
-`install.zsh` reports missing CLIs but does not run Homebrew, npm global installs, curl-to-shell installers, or privilege escalation. The recipient or their package-management policy owns those choices.
+`install.zsh` reports missing CLIs but does not run Homebrew, npm global installs, curl-to-shell installers, or privilege escalation. The separate `addons.zsh` helper installs only a specifically named add-on and never activates provider routing. The recipient or their package-management policy owns those choices.
 
 ## Routing examples
 
