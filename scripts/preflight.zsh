@@ -27,6 +27,15 @@ for command_name in $recommended; do
   fi
 done
 
+print 'Opt-in Codex add-ons:'
+for command_name in ocx codexbar; do
+  if command -v "$command_name" >/dev/null 2>&1; then
+    print "  present  $command_name"
+  else
+    print "  absent   $command_name"
+  fi
+done
+
 print 'Static-key MCP environment:'
 for variable_name in AGENTENRICH_API_KEY BLAND_API_KEY CONTEXT_DEV_API_KEY HEROUI_PERSONAL_TOKEN INSTANTLY_API_KEY; do
   if (( ${+parameters[$variable_name]} )) && [[ -n "${(P)variable_name}" ]]; then

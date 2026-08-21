@@ -8,6 +8,7 @@
 - A repository marketplace and plugin manifest.
 - A read-only preflight, opt-in installer, and repository audit.
 - Current official-plugin and CLI manifests.
+- A reviewed optional-add-on manifest with explicit installers for OpenCodex and CodexBar.
 
 The plugin and explicit-only directories are the authoritative skill inventory:
 
@@ -18,7 +19,7 @@ find skills/explicit-only -mindepth 1 -maxdepth 1 -type d -exec basename {} \; |
 
 ## Referenced, not copied
 
-Supported vendor-managed plugins remain vendor-managed so the recipient receives current versions: the OpenAI bundled/curated runtime plugins, Compound Engineering, and Zoom.
+Supported vendor-managed plugins remain vendor-managed so the recipient receives current versions: the OpenAI bundled/curated runtime plugins, Codex Security, Compound Engineering, and Zoom. OpenCodex, CodexBar, and the canonical OpenAI Codex repository are referenced rather than copied.
 
 ## Explicit-only skill handling
 

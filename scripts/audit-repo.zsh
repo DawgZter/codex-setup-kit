@@ -20,9 +20,26 @@ check 'plugin manifest JSON' jq -e . "$plugin_root/.codex-plugin/plugin.json"
 check 'MCP manifest JSON' jq -e . "$plugin_root/.mcp.json"
 check 'marketplace JSON' jq -e . "$repo_root/.agents/plugins/marketplace.json"
 check 'CLI manifest JSON' jq -e . "$repo_root/config/cli-manifest.json"
+check 'add-on manifest JSON' jq -e . "$repo_root/config/addon-manifest.json"
 check 'plugin inventory JSON' jq -e . "$repo_root/config/plugin-manifest.json"
 check 'marketplace inventory JSON' jq -e . "$repo_root/config/marketplace-manifest.json"
 check 'skill inventory JSON' jq -e . "$repo_root/config/skill-manifest.json"
+
+if [[ "$(jq '[.addons[].id] | length' "$repo_root/config/addon-manifest.json")" == 2 ]] &&
+   jq -e '.addons[] | select(.id == "opencodex" and .automaticActivation == false)' "$repo_root/config/addon-manifest.json" >/dev/null &&
+   jq -e '.addons[] | select(.id == "codexbar" and .automaticActivation == false)' "$repo_root/config/addon-manifest.json" >/dev/null; then
+  print 'ok  optional add-ons are explicit and non-activating'
+else
+  print -u2 'FAIL  optional add-on policy or inventory'
+  failures=$(( failures + 1 ))
+fi
+
+if jq -e '.install[] | select(.id == "codex-security@openai-curated")' "$repo_root/config/plugin-manifest.json" >/dev/null; then
+  print 'ok  Codex Security plugin inventory'
+else
+  print -u2 'FAIL  Codex Security plugin missing from inventory'
+  failures=$(( failures + 1 ))
+fi
 
 plugin_skill_count="$(find "$plugin_root/skills" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')"
 explicit_skill_count="$(find "$repo_root/skills/explicit-only" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')"

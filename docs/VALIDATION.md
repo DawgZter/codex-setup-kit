@@ -19,6 +19,8 @@ Validated on 2026-08-21 with `codex-cli 0.146.0`.
 - Webflow MCP and named Webflow skill scan: passed absent.
 - Source-machine absolute path and personal-email scan: passed absent.
 - High-confidence secret-pattern scan: passed absent.
+- Optional add-on policy: OpenCodex and CodexBar are explicit installs and non-activating by default.
+- Dependency availability: OpenCodex npm package `2.28.0`, CodexBar Homebrew cask `0.53.0`, and Codex Security plugin `0.1.11` were present in their current package catalogs.
 
 The generic Agent Skills validator also ran. All plugin skills passed except `reui`, which intentionally retains Codex's supported `user-invocable: false` extension. The current Codex plugin validator accepts that field. The 18 explicit-only skills intentionally retain `disable-model-invocation: true` and are therefore validated and installed as local Codex skills rather than plugin skills.
 
@@ -35,6 +37,8 @@ Using a fresh temporary `CODEX_HOME`:
 - External Compound Engineering marketplace installation: passed.
 
 App-bundled and OpenAI-curated plugins are not exposed inside an empty CLI-only temporary `CODEX_HOME`; the full installer reports them as unavailable and continues. They are available in a normal Codex Desktop profile, which was the source environment used for the inventory.
+
+The OpenCodex and CodexBar package installers were syntax- and manifest-validated but were not executed during repository validation. This avoids changing the source machine's global npm packages, Homebrew casks, provider routing, or local monitoring integrations.
 
 ## Remaining recipient checks
 
